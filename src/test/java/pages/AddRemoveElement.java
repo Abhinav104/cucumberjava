@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,8 @@ public class AddRemoveElement {
 	
 	@FindBy(xpath = "//button[@onclick='deleteElement()']")
 	WebElement btn_delete;
+	
+//	By searchButtonLocator = By.id("searchButton");
 	
 	//Creating contructor: It is func with same class name and does not have return type
 	

@@ -1,0 +1,432 @@
+1- What strategies you followed while building a selenium work from scratch?
+
+-Implement the Page Object Model design pattern to separate web page elements and actions from test code.
+- Create a dedicated class (page object) for each web page or component in your application.
+- Common structures include packages for test cases, page objects, utilities, and configurations.
+- Develop reusable utility functions and libraries to handle common actions like interacting with web elements, 
+handling waits, and performing assertions.
+
+2- Difference between Implicit, Explicit and Fluent waits in Selenium?
+- An implicit wait is set at the WebDriver level and applies globally to all web elements.
+-  Implicit waits are useful when you have a consistent delay across most or all web elements in your application.
+- Explicit waits are suitable when you need to wait for specific conditions on a particular element, 
+like waiting for an element to become clickable or visible.
+
+3- • Explain abstraction and interface respect of selenium with some example
+
+
+4-  What is page object and page factory model?
+
+Page Object Model (POM) and Page Factory are design patterns used in Selenium for creating maintainable and organized 
+test automation code. 
+In POM Each web page or component in your application has a corresponding page class that contains methods to interact with 
+the page's elements. These methods are specific to that page.
+
+Page Factory is an enhancement to the Page Object Model.
+Page Factory uses annotations to identify elements and initialize them lazily when needed.
+Check page factory code
+
+5- What is Webdriver, Name methods which do not have the implementation?
+OR What are the methods present in the webdriver interface?
+
+Webdriver provides a set of methods and interfaces for controlling web browsers and automating user interactions on web 
+pages. WebDriver does not have a concrete implementation itself; instead, it serves as an interface.
+ex: findelement, get(), close(), quit().
+
+
+6- • What's the fastest locator in Selenium?
+ 
+The "fastest" locator in Selenium can vary depending on the specific circumstances and the complexity of the web page 
+you are working with. 
+Here's a general ranking of common locators in terms of speed, from fastest to slowest:
+WebElement element = driver.findElement(By.id("elementId"));
+WebElement element = driver.findElement(By.name("elementName"));
+WebElement element = driver.findElement(By.cssSelector("cssSelector"));
+WebElement element = driver.findElement(By.xpath("xpathExpression"));
+WebElement element = driver.findElement(By.className("className"));
+
+7- What does :: ( doubles colon ) in sibling xpaths represent?
+
+In XPath, the double colon (::) is used to indicate axes.
+The double colon is followed by the name of the axis, such as self, parent, following, preceding,
+Some Examples:
+
+//div[@id='example']::self
+//div[@id='example']::parent
+//div[@id='example']::following-sibling::p
+//div[@id='example']::preceding-sibling::p
+
+8- What is difference between get() and navigate().to() in Selenium?
+Both methods can be used to navigate to a URL, but navigate().to() provides more capabilities for advanced navigation 
+and page interaction, such as moving forward and backward in the browser's history. Use get() when you simply want to 
+load a URL, and use navigate().to() when you need more control over navigation actions.
+
+9- • How would you check the broken links, in the webpage?
+Need Coding
+
+10- • Difference between submit() and click() in Selenium?
+click() is used for clicking interactive elements like buttons and links, while submit() is used specifically for 
+submitting <form> elements. The choice between these methods depends on the type of interaction you want to simulate on a 
+web page.
+
+11- • Difference between absolute XPath ( / ) and relative XPath ( // ) 
+
+Absolute XPath (/): /html/body/div[1]/div[2]/form/input[3]
+
+Relative XPath (//): //input[@name='email']
+
+12- • Difference between findelement and findelements?
+findElement is used to locate the first web element that matches the specified criteria.
+If no matching elements are found, it throws a NoSuchElementException exception.
+WebElement element = driver.findElement(By.id("elementId"));
+
+List<WebElement> elements = driver.findElements(By.tagName("a"));
+findElements is used to locate all web elements that match the specified criteria.
+If no matching elements are found, it returns an empty list (not null), so it won't throw an exception.
+
+13- • Difference between s and is?
+s and is are both HTML elements used to create sub-documents within a web page, but they have some key 
+differences in how they are implemented and used:
+
+s are deprecated and used for dividing a page into multiple sub-documents.
+is are modern, preferred for embedding external content, and provide more control and isolation.
+For most web development scenarios, is are the recommended choice for embedding sub-documents, as they offer better 
+control and security.
+
+14- • Return type of findelement and findelements?
+findElement returns a single WebElement object that represents the first web element matching the specified criteria.
+WebElement element = driver.findElement(By.id("elementId"));
+
+findElements returns a list of WebElement objects representing all matching elements found on the page based on the 
+specified criteria.
+List<WebElement> elements = driver.findElements(By.tagName("a"));
+
+15- What error will be thrown when no element found for findelement and findelements?
+findElement throws a NoSuchElementException when no element is found, while findElements returns an empty list when 
+no elements match the criteria.
+
+try {
+    WebElement element = driver.findElement(By.id("nonExistentElement"));
+    // Perform actions on the element if found
+} catch (NoSuchElementException e) {
+    // Handle the exception when the element is not found
+    System.out.println("Element not found: " + e.getMessage());
+}
+
+List<WebElement> elements = driver.findElements(By.className("nonExistentClass"));
+if (elements.isEmpty()) {
+    System.out.println("No elements found with the specified class.");
+} else {
+    // Process the found elements
+}
+
+16- State some exception which you have faced in your work?
+(Don’t mention only selenium exception. Explain java exception also)
+
+- NoSuchElementException (Selenium Exception):
+Occurs when an expected element is not found in the DOM.
+Handling: Use try-catch blocks to gracefully handle this exception by adding explicit waits or retry mechanisms 
+to wait for the element to become available.
+
+
+2. StaleElementReferenceException (Selenium Exception):
+Occurs when an element is no longer attached to the DOM.
+Handling: This exception often occurs after the DOM is modified. You can catch it and re-locate the element if needed.
+
+3. TimeoutException (Selenium Exception):
+
+Occurs when an operation times out, such as when waiting for an element to be present or clickable.
+Handling: Implement explicit waits with appropriate timeouts to avoid this exception, and handle it with retry mechanisms.
+
+4. WebDriverException (Selenium Exception):
+A general exception for WebDriver-related errors.
+Handling: Handle specific subclasses of WebDriverException for more precise error handling.
+
+5. ElementNotInteractableException (Selenium Exception):
+Occurs when an element is present in the DOM but not interactable (e.g., hidden, disabled).
+Handling: Ensure the element is in an interactable state before performing actions like clicking or typing.
+
+6. FileNotFoundException (Java Exception):
+Occurs when attempting to access a file or resource that does not exist.
+Handling: Check for the existence of files or resources before attempting to access them and handle the exception accordingly.
+
+7. IOException (Java Exception):
+General input/output exception that can occur during file operations.
+Handling: Use try-catch blocks when working with files, and handle IOExceptions by closing resources properly.
+
+8. NullPointerException (Java Exception):
+Occurs when trying to access or manipulate an object or variable that is null.
+Handling: Implement null checks to ensure that objects are not null before attempting to use them.
+
+9. ArithmeticException (Java Exception):
+Occurs when performing illegal arithmetic operations (e.g., dividing by zero).
+Handling: Avoid dividing by zero and perform proper error handling for arithmetic operations.
+
+
+17- how to handle stale elementexception?
+Check File in Cucumber Java >> StaleElemException
+
+18- • What are the interface used in selenium?
+
+19- How do you initialize web elements in POM? What error or exception will come if not initiated?
+
+In the Page Object Model (POM) design pattern in Selenium, you initialize web elements using the @FindBy annotation 
+along with a locator strategy.
+
+20- • What is the difference between close and quit in selenium?
+close() closes the current browser window/tab but leaves the WebDriver session open for further interactions with 
+other windows/tabs.
+quit() terminates the entire WebDriver session, closing all browser windows/tabs and releasing all associated resources.
+
+21- • How do you handle Alert in Selenium?
+
+Handling alerts (JavaScript pop-up dialogs) in Selenium WebDriver involves interacting with the Alert interface 
+provided by WebDriver. 
+Alert alert = driver.switchTo().alert();
+alert.accept();
+alert.dismiss();
+String alertText = alert.getText();  //Get Alert Text (Retrieve the Text from the Alert)
+alert.sendKeys("Your input text"); //Enter Text into the Alert (for Prompt Alerts):
+driver.switchTo().defaultContent();
+
+22- In a web page, there are several Pop-up, but we don’t when the pop-up will appear, in this case how we will 
+handle the Pop-up using Selenium WebDriver (Java)
+
+23- How to cover character keyboard operation from the context menu utilizing user-defined keyword?
+
+Right Click operation is also called Context Click in Selenium.
+Actions actions = new Actions(driver);
+WebElement elementLocator = driver.findElement(By.id("ID"));
+actions.contextClick(elementLocator).perform();
+
+24- Where can “Dynamic Polymorphism” in Selenium WebDriver be observed?
+
+Dynamic polymorphism is observed in Selenium WebDriver is when interacting with web elements using the WebElement 
+interface and its various implementations.
+The WebElement interface includes methods for interacting with these elements, such as click(), sendKeys(), getText(), etc
+
+// Click the web element using the common WebElement interface
+buttonElement.click();
+
+25- If proper Xpath, CssSelector and ID are not available, how do you identify an object?
+- JavaScript Execution:
+- Coordinates-Based Actions:
+
+26- Consider you are only allowed to use css locator, how will you find the parent/grandparent of a web element?
+
+<div class="parent">
+    <p>Child Element</p>
+</div>
+
+CSS: div:has(p)
+
+Finding grandparent
+<div class="grandparent">
+    <div class="parent">
+        <p>Child Element</p>
+    </div>
+</div>
+
+div.parent p
+
+27- What is returned by driver().manage() ?
+Commonly used methods and options available through driver().manage() include:
+
+- Timeouts Management:
+- Window Management:
+- Cookies Management:
+- Logging Management:
+- Alert Management:
+
+28- How to Get the values from the dropdown and print them in Ascending order
+Check File: Dropdown values.
+
+29- What is difference between build() and perform() in selenium?
+The build() method is used to compile (build) a sequence of actions but does not actually perform the actions on the 
+web page.
+It is typically used when you want to create a series of actions and then execute them later with the perform() method.
+After calling build(), you can still add more actions to the sequence if needed before calling perform().
+
+30- • Return type of getwindowhandle() and getwindowhandles()?
+getWindowHandle() returns a single window handle as a String, while getWindowHandles() returns a set of window handles 
+as Set<String>
+
+31- • Return type of getwindowhandle() and getwindowhandles()?
+
+getWindowHandle() returns a single window handle as a String, while getWindowHandles() returns a set of 
+window handles as Set<String>.
+
+String currentWindowHandle = driver.getWindowHandle();
+
+Set<String> windowHandles = driver.getWindowHandles();
+for (String handle : windowHandles) {
+    driver.switchTo().window(handle);
+    // Perform actions in the current window/tab
+}
+
+32- Window Handling in Selenium -Switching from another window to Parent window:
+
+String parentWindowHandle = driver.getWindowHandle(); // Store the parent window handle
+Set<String> windowHandles = driver.getWindowHandles(); //to get a set of all currently open window handles.
+
+
+// Switch to the parent window
+for (String windowHandle : windowHandles) {
+    if (!windowHandle.equals(parentWindowHandle)) {
+        driver.switchTo().window(parentWindowHandle);
+        break;
+    }
+}
+
+33- • If the button is disabled? how to check -using getattribute()
+Check File: CheckButtonDisabled
+
+34- • Explain method overloading with selenium and some example
+
+
+    // Method to click a button by WebElement
+    public void clickButton(WebElement button) {
+        button.click();
+    }
+
+    // Method to click a button by its XPath
+    public void clickButton(String xpath) {
+        WebElement button = driver.findElement(By.xpath(xpath));
+        button.click();
+    }
+    
+    
+35- On a web page, there are several Pop-up, but we don’t know when
+the pop-up will appear, in this case how we will handle the Popup using Selenium WebDriver (Java)
+
+try {
+	WebDriverWait wait = new WebDriverWait(driver, 10);
+	WebElement popupTriggerButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("popup-trigger")));
+	popupTriggerButton.click();
+    // Handle the alert as needed
+} catch (NoAlertPresentException e) {
+    // No alert found, continue with your test
+}
+
+36- What are approached to handle dynamic WebElement?
+
+- you can use XPath axes like ancestor, descendant, following-sibling, or preceding-sibling to locate elements relative 
+to known stable elements
+
+- You can use explicit wait for an element to meet a certain condition (e.g., visibility, presence, or clickability) before 
+interacting with it.
+
+37- Click last option in the dropdown (Last drop-down changes dynamically)
+
+
+        // Create a Select object to work with the dropdown
+        Select dropdown = new Select(dropdownElement);
+
+        // Get all options within the dropdown
+        java.util.List<WebElement> options = dropdown.getOptions();
+
+        // Determine the last option (last element in the list)
+        WebElement lastOption = options.get(options.size() - 1);
+
+        // Click on the last option
+        lastOption.click();
+
+
+38- What is Page Factory in POM Design pattern?
+Page Factory is a design pattern used to initialize web elements defined in Page Objects. Page Objects represent 
+web pages or components of a web application, and they encapsulate the structure and behavior of these pages.
+
+@FindBy Annotation: Page Factory uses the @FindBy annotation to identify and locate web elements within the 
+Page Object class.
+
+39- Annotation used in Page Object Model?
+Annotations are not a specific part of the POM design pattern itself but are commonly used in conjunction with POM 
+to enhance code organization and maintainability.
+
+@FindBy: To locate web elements
+@BeforeTest and @AfterTest: TestNG annotations
+@Test annotation is used to mark a method as a test method in TestNG. 
+
+40- • Ways to find broken links in Selenium?
+Check Link: BrokenLinkChecker
+
+
+41- Difference between assert and verify?
+Assertion - an "assertion" refers to a validation command that checks a certain condition or expected result. 
+If the condition is false (i.e., the assertion fails), it throws an exception (typically an AssertionError), and the 
+test execution is halted at that point.
+
+Verify - "verify" typically refers to a validation command that checks a certain condition or expected result, 
+but unlike assertions, if the condition is false (i.e., the verification fails), it does not throw an exception or 
+stop the test execution. Instead, it logs the failure and continues with the test execution.
+
+Check Example: AssertionExample and VerificationExample 
+
+42- When you encounter an "Element not found" error in Selenium, even though the element is visible on the web page, 
+it can be due to several reasons
+
+Use Explicit wait
+- Timing Issues:
+- Dynamic Content: such as AJAX
+- Frame or iFrame:
+
+//
+WebDriverWait wait = new WebDriverWait(driver, 10);
+WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("elementId")));
+
+
+43-How do you execute using headless mode?
+
+        // Create ChromeOptions to run in headless mode
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true); // Set headless mode to true
+
+44- In Selenium, how to get text value from text-box if gettext() is not working?
+
+WebElement textBox = driver.findElement(By.id("textboxId"));
+String textValue = textBox.getAttribute("value");
+System.out.println("Text from text box: " + textValue);
+
+45- If we are using correct locator but still getting element not
+found error then how you will resolve this error?
+
+WebDriverWait wait = new WebDriverWait(driver, 10);
+WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("elementId")));
+
+46-  What if Windows popup occurs during test execution and due
+to that can't execute automated tests, how u will resolve this
+error?
+
+Check : AlertHandlingExample
+
+47- How to scroll down a page?
+48- Find broken links
+49- Find all links
+50- Scroll to particular element
+51 - Code for open new tab and new Window
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

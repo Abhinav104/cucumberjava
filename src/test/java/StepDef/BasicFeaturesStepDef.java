@@ -5,6 +5,10 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,16 +44,21 @@ public class BasicFeaturesStepDef {
 		
 		String project_path = System.getProperty("user.dir"); //This will get the location of main project folder Cucumber Java
 		System.setProperty("webdriver.chrome.driver", project_path+"/src/test/resources/drivers/chromedriver.exe");
-		driver = new ChromeDriver();
+//		System.setProperty("webdriver.gecko.driver", project_path+"/src/test/resources/drivers/geckodriver.exe");
+		
+		WebDriver driver = new ChromeDriver();
+//		WebDriver driver = new FirefoxDriver();
 		
 		// Initialize the Page Class with the WebDriver instance
 		addremele = new AddRemoveElement(driver);
+
+		driver.get("https://the-internet.herokuapp.com");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.get("https://the-internet.herokuapp.com");
 
 	}
-
+	
+	@Test(priority=2)
 	@When("Click on add remove element")
 	public void click_on_add_remove_element(){
 	    // Write code here that turns the phrase above into concrete actions
@@ -57,6 +66,7 @@ public class BasicFeaturesStepDef {
 		addremele.clickAddRemoveLink();
 	}
 
+	@Test(priority=1)
 	@When("Click on add element")
 	public void click_on_add_element() {
 	    // Write code here that turns the phrase above into concrete actions

@@ -1,0 +1,45 @@
+@Test(dependsOnMethods="myFirstTest", alwaysRun=true)
+@Test(invocationTimeOut=10000) // if you want a test to finish within 10 seconds,
+@Test(invocationCount=10)
+@Test(description = "Test summary") //It generally contains a one-liner test summary.
+@Test(dataProvider = "name of dataProvider") //This attribute helps in creating a data driven tests. It is used to specify the name of the data provider for the test.
+@Test(priority = 2)// The default priority starts with 0 and tests execute in ascending order.
+@Test(enabled = false)//
+@Test(groups = { "sanity", "regression" })// Used to specify the groups, the test method belongs to.
+@Test(dependsOnMethods = { "dependentTestMethodName" })//  The test method only runs after successful execution of the dependent tests.
+@Test(alwaysRun=True)// the test method runs even if the dependent methods fail.
+@Test (timeOut = 500)//  This is used to specify a timeout value for the test(in milli seconds)
+
+    // Test method with priority and invocation count attributes
+    @Test(priority = 1, invocationCount = 3)
+
+Dynamic xpath with contains & id:
+//button[contains(@id, 'u_0_9_')]
+
+Dynamic xpath using starts with:
+//button[starts-with(@id, 'u_0_9_')]    
+
+Dynamic xpath using descendant(Upper ele xpath + descendant::desired_tagname )
+//form[@data-testid="royal_login_form"]/descendant::button
+
+Dynamic xpath with contains & text
+//button[contains(text(), 'Log in')]
+
+General text xpath
+//button[text()='Log in']
+
+By indexing the tag name   
+//button[1]
+
+Xpath + child axes
+//div[@class='_6ltg']//child::button
+
+xpath + parent axes
+//button[contains(text(),'Log')]//parent::div
+
+
+
+
+
+
+

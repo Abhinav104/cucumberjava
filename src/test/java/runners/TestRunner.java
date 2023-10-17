@@ -9,7 +9,7 @@ import io.cucumber.testng.CucumberOptions;
     tags="@smoke",
     plugin = {
         "pretty",
-        "html:target/cucumber-reports",
+        "html:target/cucumber-reports.html",
     }
 )
 

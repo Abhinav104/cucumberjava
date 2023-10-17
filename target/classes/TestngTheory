@@ -1,0 +1,229 @@
+1- • Why we use TestNG in your framework
+TestNG's features can help you structure your tests effectively, run them efficiently, manage dependencies, grouping test 
+cases,parallel execution and produce comprehensive reports, leading to better test coverage and more reliable test results.
+
+2- • What is the purpose of testing XML in testng
+
+The purpose of testing XML in TestNG is to provide a structured and flexible way to manage and execute tests. 
+Here's why testing XML is important in TestNG:
+- Test Suite Configuration:
+- Parallel Execution:
+- Test Prioritization: 
+- Grouping and Inclusion/Exclusion:
+- Listeners and Reporters:
+
+3- Explain the purpose of listeners? is it the selenium concept of TestNG?
+
+4-  How to run the same method 100 times in TestNG with the same data?
+@Test(invocationCount = 100)
+
+5- What are different testng annotations?
+TestNG provides a variety of annotations that you can use to control the behavior and execution of your test methods 
+and test classes.
+
+@Test: Marks a method as a test method. TestNG will execute methods annotated with this annotation as test cases.
+
+@BeforeSuite: Specifies a method that should run before all test suites in the test suite file.
+
+@AfterSuite: Specifies a method that should run after all test suites in the test suite file.
+
+@BeforeTest: Specifies a method that should run before all test methods in a <test> tag of the test suite XML file.
+
+@AfterTest: Specifies a method that should run after all test methods in a <test> tag of the test suite XML file.
+
+@BeforeClass: Marks a method that should run before all test methods in a test class.
+
+@AfterClass: Marks a method that should run after all test methods in a test class.
+
+@BeforeMethod: Specifies a method that should run before each test method in a test class.
+
+@AfterMethod: Specifies a method that should run after each test method in a test class.
+
+@DataProvider: Indicates a method that provides test data for one or more test methods.
+ Used in conjunction with the dataProvider attribute of the @Test annotation.
+
+@Parameters: Specifies parameters for a test method. Used in conjunction with the <parameter> element in the test suite XML file.
+
+@Test(enabled = false): Disables a test method so that it is not executed during test runs. Useful for temporarily excluding specific tests.
+
+@Test(dependsOnMethods = {"method1", "method2"}): Defines dependencies between test methods. A test method annotated with this will only run if the specified methods (e.g., "method1" and "method2") have passed.
+
+@Test(groups = "group1"): Assigns a test method to one or more groups. You can later specify which groups to include or exclude in test runs.
+
+@Listeners: Specifies custom listeners for test classes or test methods. Listeners can perform custom actions during test execution, such as reporting and logging.
+
+@Parameters: Defines parameters for a test method when used in conjunction with a <parameter> element in the test suite XML file.
+
+@Factory: Marks a method as a factory that creates instances of test classes at runtime. Useful for data-driven testing and dynamically creating test instances.
+ 
+
+6- What is @dataprovider?
+The @DataProvider annotation in TestNG is used to define a method that supplies test data to one or more test methods 
+in a test class. 
+Check: DataProviderExample
+
+7- • Difference between @Factory and @DataProvider?
+
+8- • Test Order in TestNG?
+You can assign priorities to test methods using the priority attribute of the @Test annotation. 
+Test methods with higher priorities (lower numerical values) will run before those with lower priorities.
+
+@Test(priority = 1)
+@Test(priority = 2)
+
+9- • How to add/remove test cases in Testng.xml?
+<suite name="MyTestSuite">
+    <test name="MyTest">
+        <classes>
+            <class name="com.example.ExistingTestClass" />
+            <!-- Add the new test class here -->
+            <class name="com.example.NewTestClass" />
+        </classes>
+    </test>
+</suite>
+
+10- Explain the difference between beforemethod, beforetest, and beforeclass?
+@BeforeMethod is for setup that occurs before each individual test method within a test class.
+@BeforeTest is for setup that is common to all test methods within a <test> tag in the XML configuration file.
+@BeforeClass is for setup that is specific to a particular test class and runs once for that class.
+These annotations provide flexibility in setting up your test environment at different levels, allowing you to 
+organize and manage your test suite effectively.
+
+11- • How you achieve parallel execution using testng?
+Parallel Test Execution at the Suite Level:
+<suite name="MyTestSuite" parallel="tests" thread-count="3">
+    <!-- Define your test classes here -->
+</suite>
+
+Parallel Test Execution at the Class Level:
+
+<suite name="MyTestSuite">
+    <test name="MyTest">
+        <classes parallel="classes">
+            <class name="com.example.TestClass1" />
+            <class name="com.example.TestClass2" />
+        </classes>
+    </test>
+</suite>
+
+parallel="classes": Specifies that different test classes (TestClass1 and TestClass2) should run concurrently.
+
+12- Out of 50 testcases, how you will run only the failed testcases?
+If any test case failed it generates failed-tests.xml file in test-output folder and we can run it separately by 
+right clicking & choosing run with testng .
+
+13- • How can you take the screenshot for the failed testcases?
+
+14- TestNG: Parallel executions, Grouping?
+
+Parallel execution in TestNG allows you to run multiple test methods or test classes concurrently, which can 
+significantly speed up test execution, especially for large test suites. 
+
+You can use the groups attribute within the @Test annotation to assign test methods to one or more groups. 
+
+@Test(groups = {"regression", "login"})
+@Test(groups = "smoke")
+@Test(groups = "regression")
+
+15- How many suits can be there in testNG , what if I run all the suits?
+
+<suite name="Suite1">
+    <test name="Test1">
+        <classes>
+            <class name="com.example.Class1" />
+            <class name="com.example.Class2" />
+        </classes>
+    </test>
+</suite>
+
+<suite name="Suite2">
+    <test name="Test2">
+        <classes>
+            <class name="com.example.Class3" />
+        </classes>
+    </test>
+</suite>
+
+
+16- Cucumber tags and annotations?
+
+Some commonly used annotations in Cucumber with Java include:
+
+@Given: Links a step definition to a Given step in a scenario.
+@When: Links a step definition to a When step in a scenario.
+@Then: Links a step definition to a Then step in a scenario.
+@And or @But: Used to add additional conditions or steps in a scenario.
+@Before: Runs before each scenario and can be used for setup tasks.
+@After: Runs after each scenario and can be used for teardown or cleanup tasks.
+@BeforeStep: Runs before each step within a scenario.
+@AfterStep: Runs after each step within a scenario.
+
+17- • What is background in Cucumber?
+The scenarios (e.g., "Scenario 1" and "Scenario 2") can include their own steps, but those steps will be executed after 
+the Background steps.
+ Background:
+    Given some common setup steps
+    And more common steps if needed
+    
+18- • Difference between Scenario and Scenario Outline?
+
+A Scenario is used to define a single, concrete test scenario. It represents a specific set of steps and expected 
+outcomes.
+It does not allow for parameterization or data-driven testing. The steps in a Scenario are fixed and do not change 
+during execution.
+
+Scenario Outline is used when you want to test the same steps with multiple sets of inputs and expected results.
+
+Scenario Outline: User logs in with different credentials
+  Given the user is on the login page
+  When the user enters valid username "<username>" and password "<password>"
+  Then the user should <loginStatus>
+
+  Examples:
+    | username  | password   | loginStatus       |
+    | user1     | password1  | be logged in      |
+    | user2     | password2  | not be logged in  |
+    | user3     | password3  | be logged in      |
+
+19- • Write skeleton of test runner?
+
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+    features = "src/test/resources/features", // Specify the directory or file where your feature files are located
+    glue = "com.example.stepdefinitions", // Specify the package where your step definitions are located
+    plugin = {"pretty", "html:target/cucumber-reports"}, // Specify plugins for reporting
+    tags = "@smoke", // Specify tags to filter scenarios (optional)
+    strict = true // Fail if there are any undefined or pending steps
+)
+
+public class CucumberTestRunner {
+    // This class acts as a test runner
+}
+
+20- we have to define these tags in testrunner file? 
+To run different combinations of tags when multiple tags are present in Cucumber, you can use logical operators 
+(and, or, not) to create complex tag expressions. 
+
+For example, to run scenarios with both "@smoke" and "@login" tags:
+cucumber --tags "@smoke and @login"
+
+For example, to run scenarios with either "@smoke" or "@regression" tags:
+cucumber --tags "@smoke or @regression"
+
+For example, to run scenarios that do not have the "@skip" tag:
+cucumber --tags "not @skip"
+
+For example, to run scenarios with "@smoke" and "@login" but exclude scenarios with "@skip":
+cucumber --tags "@smoke and @login and not @skip"
+
+21- • Difference between hooks and tags?
+Hooks are defined in your step definitions file and are associated with specific events (e.g., @Before, @After) and 
+optionally tagged with specific scenarios or features.
+
+You can use tags to categorize scenarios based on their characteristics, such as @smoke, @regression, @ui, 
+or any custom tags that match your testing needs.

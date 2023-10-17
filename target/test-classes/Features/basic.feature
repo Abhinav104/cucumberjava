@@ -1,13 +1,13 @@
 Feature: Automating basic features of Selenium
 
-  
+  @smoke
   Scenario: Add or remove elements
     Given User should be on home
     When Click on add remove element
     And Click on add element
     Then Delete button should enable
     
-	
+	@smoke
   Scenario: Automating Basic Auth
     Given User should be on home
     When Clicks on Basic Auth
@@ -53,7 +53,6 @@ Feature: Automating basic features of Selenium
     And Clicks on add close button
     Then user should be able to click on click here link
 
-  @smoke
   Scenario: Exit intent
     Given User should be on home
     When clicks on eit intent link
