@@ -5,8 +5,6 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 import io.cucumber.java.en.Given;
@@ -21,6 +19,7 @@ import pages.DropDown;
 import pages.EntryAd;
 import pages.ExitIntent;
 import pages.JavaScriptAlert;
+
 
 public class BasicFeaturesStepDef {
 	
@@ -37,20 +36,21 @@ public class BasicFeaturesStepDef {
 	DropDown dropdown;
 	EntryAd entryad;
 	ExitIntent exitintent;
+        
+    
 	
-	
+//	@Test(priority =1)
 	@Given("User should be on home")
 	public void user_should_be_on_home() {
 		
 		String project_path = System.getProperty("user.dir"); //This will get the location of main project folder Cucumber Java
 		System.setProperty("webdriver.chrome.driver", project_path+"/src/test/resources/drivers/chromedriver.exe");
-//		System.setProperty("webdriver.gecko.driver", project_path+"/src/test/resources/drivers/geckodriver.exe");
-		
 		WebDriver driver = new ChromeDriver();
-//		WebDriver driver = new FirefoxDriver();
+
 		
 		// Initialize the Page Class with the WebDriver instance
 		addremele = new AddRemoveElement(driver);
+		basicauth = new BasicAuth(driver);
 
 		driver.get("https://the-internet.herokuapp.com");
 		driver.manage().window().maximize();
@@ -58,7 +58,7 @@ public class BasicFeaturesStepDef {
 
 	}
 	
-	@Test(priority=2)
+//	@Test(priority=2)
 	@When("Click on add remove element")
 	public void click_on_add_remove_element(){
 	    // Write code here that turns the phrase above into concrete actions
@@ -66,7 +66,7 @@ public class BasicFeaturesStepDef {
 		addremele.clickAddRemoveLink();
 	}
 
-	@Test(priority=1)
+	
 	@When("Click on add element")
 	public void click_on_add_element() {
 	    // Write code here that turns the phrase above into concrete actions
@@ -79,13 +79,13 @@ public class BasicFeaturesStepDef {
 	    // Write code here that turns the phrase above into concrete actions
 //		System.out.println("test");
 		addremele.clickDelete();
-		driver.close();
 	}
 
 	@When("Clicks on Basic Auth")
 	public void clicks_on_basic_auth() {
 	    // Write code here that turns the phrase above into concrete actions
-		basicauth = new BasicAuth(driver);
+		//need to enable below code when we have sepratare stepdef
+//		basicauth = new BasicAuth(driver);
 		basicauth.clickBasicAuthLink();
 	}
 
@@ -100,7 +100,7 @@ public class BasicFeaturesStepDef {
 	public void congratulation_message_should_appear() {
 	    // Write code here that turns the phrase above into concrete actions
 	    basicauth.validateCongText();
-	    driver.close();
+	    
 	}
 
 	@When("Clicks on broken image section")

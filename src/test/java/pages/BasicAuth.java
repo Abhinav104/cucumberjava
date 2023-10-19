@@ -9,7 +9,7 @@ import org.testng.Assert;
 public class BasicAuth {
 	WebDriver driver;
 	
-	@FindBy(xpath = "//a[@href='/basic_auth']")
+	@FindBy(xpath = "//a[contains(text(),'Basic Auth')]")
 	WebElement linkBasicAuth;
 	
 	@FindBy(css = "div[class='example']>p")
@@ -36,6 +36,7 @@ public class BasicAuth {
 	public void validateCongText() {
 		String actual_text = congText.getText();
 		Assert.assertEquals(actual_text, cong_msz_text);
+		driver.close();
 	}
 	
 	
