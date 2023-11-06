@@ -7,7 +7,7 @@ Feature: Automating basic features of Selenium
     And Click on add element
     Then Delete button should enable
     
-
+ @smoke
   Scenario: Automating Basic Auth
     Given User should be on home
     When Clicks on Basic Auth
